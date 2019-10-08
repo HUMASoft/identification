@@ -49,8 +49,8 @@ int main ()
 
   //m1 setup
   SocketCanPort pm31("can1");
-  CiA402SetupData sd31(2*2048,3.7,0.001, 1.1);
-  CiA402Device m1 (1, &pm31, &sd31);
+  CiA402SetupData sd31(2048,24,0.001, 0.144);
+  CiA402Device m1 (31, &pm31, &sd31);
   m1.Reset();
   m1.SwitchOn();
     m1.SetupPositionMode(10,10);
@@ -59,8 +59,8 @@ int main ()
 
   //m2
   SocketCanPort pm2("can1");
-  CiA402SetupData sd32(2*2048,3.7,0.001, 1.1);
-  CiA402Device m2 (2, &pm2, &sd32);
+  CiA402SetupData sd32(2048,24,0.001, 0.144);
+  CiA402Device m2 (32, &pm2, &sd32);
   m2.Reset();
   m2.SwitchOn();
     m2.SetupPositionMode(10,10);
@@ -70,8 +70,8 @@ int main ()
 
   //m3
   SocketCanPort pm3("can1");
-  CiA402SetupData sd33(2*2048,3.7,0.001, 1.1);
-  CiA402Device m3 (3, &pm3, &sd33);
+  CiA402SetupData sd33(2048,24,0.001, 0.144);
+  CiA402Device m3 (33, &pm3, &sd33);
   m3.Reset();
   m3.SwitchOn();
     m3.SetupPositionMode(10,10);
@@ -105,7 +105,7 @@ int main ()
   //--Neck Kinematics--
   double l0=0.1085;
   double lg0=l0+0.002;
-  double radius=0.01; //winch radius
+  double radius=0.0075; //winch radius
   GeoInkinematics neck_ik(0.052,0.052,l0); //kinematics geometric
   vector<double> lengths(3);
 
