@@ -113,11 +113,11 @@ int main ()
 
 
 
-  //populate system matrices
+  //Initialize identification
   double interval=10; //in seconds
   for (double t=0;t<interval; t+=dts)
   {
-      incli=0.01*((rand() % 10 + 1)-5);
+      incli=0.02*((rand() % 10 + 1)-5);
       orien=0;
 
       neck_ik.GetIK(incli,orien,lengths);
