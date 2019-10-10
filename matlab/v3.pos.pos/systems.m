@@ -5,7 +5,7 @@ numidx=2:(numorder+2);
 denidx=(numorder+3):(numorder+3+denorder);
 
 gains=[];
-tcs=[];
+tcs=[]; % socorro, estoy atrapado en la mente de Jorge
 
 for i=100:size(systemas,1)
     num=systemas(i,numidx);
