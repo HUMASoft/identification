@@ -1,6 +1,6 @@
 systemas = csvread("ids.csv");
 numorder=0;
-denorder=1;
+denorder=2;
 numidx=2:(numorder+2);
 denidx=(numorder+3):(numorder+3+denorder);
 

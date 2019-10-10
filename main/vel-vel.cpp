@@ -25,7 +25,7 @@ int main ()
   ofstream data("../ids.csv",std::ofstream::out);
 
   //Samplinfg time
-  double dts=0.025;
+  double dts=0.01;
   SamplingTime Ts(dts);
 
   //tau = 0.1
@@ -34,11 +34,8 @@ int main ()
 //   z - 0.9048
   SystemBlock filter(0.09516,0,- 0.9048,1);
 
-  int numOrder=0,denOrder=1;
+  int numOrder=0,denOrder=2;
   OnlineSystemIdentification model(numOrder, denOrder);//, filter, 0.98, 0.8 );
-  SystemBlock sys;
-  FPDBlock con(1,1,1,dts);
-  PIDBlock intcon(0.1,0.01,0,dts);
 
 //  data << "Controller PID" << " , " << " 0.1,0.05,0,dts "<< endl;
 
@@ -95,7 +92,7 @@ int main ()
   GeoInkinematics neck_ik(0.052,0.052,l0); //kinematics geometric
   vector<double> lengths(3);
 
-  double vel;
+  double vel, curvel;
 
 
 
@@ -103,14 +100,17 @@ int main ()
   double interval=10; //in seconds
   for (double t=0;t<interval; t+=dts)
   {
-      vel=0.02*((rand() % 10 + 1)-5);
-
+      vel=0.5*(-0.5+1*((rand() % 10 + 1)-5));
       m1.SetVelocity(vel);
 //      m2.SetVelocity(vel);
 //      m3.SetVelocity(vel);
+      curvel = m1.GetVelocity();
 
-      model.UpdateSystem(vel, m1.GetVelocity());
+      model.UpdateSystem(vel, curvel );
 
+
+      model.PrintZTransferFunction(dts);
+      model.GetZTransferFunction(num,den);
       Ts.WaitSamplingTime();
 
 
@@ -127,6 +127,7 @@ int main ()
 
       }
       data << endl;
+
   }
 
   m1.SetVelocity(0);
